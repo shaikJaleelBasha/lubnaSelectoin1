@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Percentage Calculator</title>
+    <style>
+      /* General Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url("https://images.unsplash.com/photo-1494087338499-df602dfffc7b"); /* Background image */
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      /* Main Container */
+      .container {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        transform: perspective(1500px) rotateX(0deg) rotateY(0deg);
+        transition: transform 0.5s ease;
+      }
+
+      .container:hover {
+        transform: perspective(1500px) rotateX(5deg) rotateY(5deg);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #ffd700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      }
+
+      h3 {
+        text-align: center;
+        font-size: 1.4rem;
+        margin-top: 15px;
+        color: #ffd700; /* Gold color for result */
+      }
+
+      /* Input Fields */
+      input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        background-color: #fff;
+        color: #333;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      /* Focus Effect */
+      input:focus {
+        outline: none;
+        border-color: #4caf50;
+        background-color: #f4f4f4;
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Buttons */
+      button {
+        width: 100%;
+        padding: 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      button:active {
+        transform: translateY(2px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+          margin: 0 10px;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        button {
+          font-size: 1rem;
+        }
+
+        input {
+          font-size: 1rem;
+          padding: 12px;
+        }
+      }
+
+      /* Additional Mobile Adjustments */
+      @media (max-width: 400px) {
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        input {
+          font-size: 0.9rem;
+          padding: 10px;
+        }
+
+        button {
+          font-size: 1rem;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>3D Percentage Calculator</h2>
+      <input type="number" id="y" placeholder="Enter selling price" />
+      <input
+        type="number"
+        id="a"
+        placeholder="Enter discount added to the selling price"
+      />
+      <button onclick="calculateX()">Calculate original amount</button>
+      <h3 id="resultX"></h3>
+
+      <input type="number" id="x" placeholder="Enter original amount" />
+      <button onclick="calculateZ()">Calculate profit Percentage amount</button>
+      <h3 id="resultZ"></h3>
+    </div>
+
+    <script>
+      function calculateX() {
+        let y = parseFloat(document.getElementById("y").value);
+        let a = parseFloat(document.getElementById("a").value);
+        if (!isNaN(y) && !isNaN(a) && a !== 0) {
+          let x = (y * 100) / (a + 100);
+          document.getElementById("resultX").innerText =
+            "original amount: " + x.toFixed(2);
+        } else {
+          document.getElementById("resultX").innerText =
+            "Please enter valid numbers (A should not be 0).";
+        }
+      }
+
+      function calculateZ() {
+        let y = parseFloat(document.getElementById("y").value);
+        let x = parseFloat(document.getElementById("x").value);
+        if (!isNaN(y) && !isNaN(x) && y !== 0) {
+          let z = ((y - x) * 100) / y;
+          document.getElementById("resultZ").innerText =
+            "selling profit: " + z.toFixed(2);
+        } else {
+          document.getElementById("resultZ").innerText =
+            "Please enter valid numbers (selling amount should not be 0).";
+        }
+      }
+    </script>
+  </body>
+</html>
